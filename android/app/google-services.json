@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "933116392687",
+    "firebase_url": "https://habitatu-968bb-default-rtdb.europe-west1.firebasedatabase.app",
+    "project_id": "habitatu-968bb",
+    "storage_bucket": "habitatu-968bb.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:933116392687:android:faf37d67acdba776fad71a",
+        "android_client_info": {
+          "package_name": "pl.xezolpl.habitatu"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "933116392687-suj6b95egsd9drug83i97s3hjf7dmem7.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDxk6gpn7tQmuE8aKox5W3mgl-SPjHL7oo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "933116392687-suj6b95egsd9drug83i97s3hjf7dmem7.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
