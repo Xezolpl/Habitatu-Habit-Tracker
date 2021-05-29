@@ -2,15 +2,6 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 
-abstract class AppMargins {
-  static const mini = 2.0;
-  static const verySmall = 4.0;
-  static const small = 8.0;
-  static const smallMedium = 12.0;
-  static const medium = 16.0;
-  static const big = 24.0;
-}
-
 abstract class AppFontSizes {
   static const small = 12.0;
   static const normal = 14.0;
