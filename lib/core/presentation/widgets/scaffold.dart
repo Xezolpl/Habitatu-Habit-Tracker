@@ -7,13 +7,13 @@ class AppScaffold extends StatelessWidget {
   final AppBar? appBar;
   final BottomNavigationBar? bottomNavBar;
 
-  const AppScaffold(
-      {required this.body,
-      this.appBar,
-      this.bottomNavBar,
-      Key? key,
-      this.drawer})
-      : super(key: key);
+  const AppScaffold({
+    required this.body,
+    this.appBar,
+    this.bottomNavBar,
+    Key? key,
+    this.drawer,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

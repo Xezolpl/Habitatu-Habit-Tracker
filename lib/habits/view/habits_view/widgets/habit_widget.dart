@@ -1,5 +1,8 @@
+import 'dart:math';
+
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:habitatu/core/presentation/constants.dart';
 import 'package:habitatu/core/presentation/widgets/styled_card.dart';
 import 'package:habitatu/core/tools/date_formater.dart';
@@ -16,62 +19,60 @@ class HabitWidget extends StatefulWidget {
 
 class _HabitWidgetState extends State<HabitWidget> {
   bool isExpanded = false;
-  static const backgroundColor = Color(0xffE7FF79);
+  final backgroundColor =
+      Colors.accents[Random().nextInt(Colors.accents.length)];
 
-  final textStyle = AppTextStyle.robotoMedium(
+  late final TextStyle textStyle = AppTextStyle.robotoMedium(
       size: 16, color: AppColors.getTextColorForBackground(backgroundColor));
 
+  //Size values
+  static const titleHeight = 100.0;
+  static const daysHeight = 85.0;
+  static const wholeCardHeight = titleHeight + daysHeight;
   final leftSectionWidth = 30.w;
-  final height = 30.w * 1.4;
 
   @override
   Widget build(BuildContext context) {
     return StyledCard(
-      backgroundColor: backgroundColor.withOpacity(0.7),
-      margin: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
-      padding: EdgeInsets.zero,
+      backgroundColor: backgroundColor.withOpacity(0.65),
       borderRadius: BorderRadius.circular(20),
-      child: SizedBox(
-        height: height,
-        child: Row(
-          children: [
-            //Left section
-            Expanded(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  _habitNameWidget(),
-                  _bottomSection2(),
-                  // _bottomSection(),
-                ],
-              ),
-            ),
-            //Right section
-            Stack(
+      child: Row(
+        children: [
+          //Left section
+          Expanded(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                ClipRRect(
-                  borderRadius: const BorderRadius.only(
-                    topRight: Radius.circular(20),
-                    bottomRight: Radius.circular(20),
-                  ),
-                  child: CustomPaint(
-                    size: Size(leftSectionWidth, height),
-                    painter: RPSCustomPainter(backgroundColor),
-                  ),
-                ),
-                _buttonsOnRightSection(),
+                _habitNameWidget(),
+                _bottomSection(),
               ],
             ),
-          ],
-        ),
+          ),
+          //Right section
+          Stack(
+            children: [
+              ClipRRect(
+                borderRadius: const BorderRadius.only(
+                  topRight: Radius.circular(20),
+                  bottomRight: Radius.circular(20),
+                ),
+                child: CustomPaint(
+                  size: Size(30.w, wholeCardHeight),
+                  painter: RPSCustomPainter(backgroundColor),
+                ),
+              ),
+              _buttonsOnRightSection(),
+            ],
+          ),
+        ],
       ),
     );
   }
 
-  Widget _bottomSection2() {
+  Widget _bottomSection() {
     final n = DateTime.now();
     return Container(
-      height: 85,
+      height: daysHeight,
       padding: const EdgeInsets.only(bottom: 8, left: 8),
       child: ListView(
         scrollDirection: Axis.horizontal,
@@ -127,7 +128,7 @@ class _HabitWidgetState extends State<HabitWidget> {
         left: 10,
       ),
       width: leftSectionWidth,
-      height: height,
+      height: wholeCardHeight,
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
@@ -185,19 +186,37 @@ class _HabitWidgetState extends State<HabitWidget> {
   }
 
   Widget _habitNameWidget() {
-    return Padding(
-      padding: const EdgeInsets.only(top: 16, left: 12),
+    return Container(
+      height: titleHeight,
+      padding: const EdgeInsets.only(top: 16, left: 12, right: 4, bottom: 12),
       child: Row(
         children: [
-          Image.asset(
-            'assets/png/1.png',
-            width: 52,
-            height: 52,
+          Container(
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(100),
+              color: Colors.white,
+            ),
+            child: Container(
+              padding: const EdgeInsets.all(6),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(100),
+                color: backgroundColor.withOpacity(0.4),
+              ),
+              child: SvgPicture.asset(
+                widget.habit.iconPath,
+                width: 52,
+                height: 52,
+              ),
+            ),
           ),
           const SizedBox(width: 24.0),
-          Text(
-            widget.habit.name,
-            style: AppTextStyle.robotoMedium(size: 26),
+          Expanded(
+            child: Text(
+              widget.habit.name,
+              style: AppTextStyle.robotoMedium(size: 20),
+              maxLines: 3,
+              overflow: TextOverflow.ellipsis,
+            ),
           ),
         ],
       ),

@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:habitatu/habits/bloc/add_habit_bloc/add_habit_bloc.dart';
 
+import '../add_habit_page.dart';
+
 class DescriptionField extends StatelessWidget {
   const DescriptionField({Key? key}) : super(key: key);
 
@@ -9,7 +11,7 @@ class DescriptionField extends StatelessWidget {
   Widget build(BuildContext context) {
     return FormBuilderTextField(
       name: 'description',
-      decoration: const InputDecoration(
+      decoration: AddHabitPage.inputDecoration.copyWith(
         labelText: 'Habit description',
       ),
       initialValue: context.read<AddHabitBloc>().state.habit.description,

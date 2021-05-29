@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:intl/intl.dart';
 
+import '../add_habit_page.dart';
+
 class StartDateField extends StatefulWidget {
   const StartDateField({Key? key}) : super(key: key);
 
@@ -18,7 +20,7 @@ class _StartDateFieldState extends State<StartDateField> {
       initialDate: DateTime.now(),
       initialValue: DateTime.now(),
       format: DateFormat.yMMMd(),
-      decoration: const InputDecoration(
+      decoration: AddHabitPage.inputDecoration.copyWith(
         labelText: 'Habit start date',
       ),
       alwaysUse24HourFormat: true,

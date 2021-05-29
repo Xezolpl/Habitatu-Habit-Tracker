@@ -5,6 +5,7 @@ import 'package:habitatu/habits/bloc/add_habit_bloc/add_habit_bloc.dart';
 import 'package:habitatu/habits/bloc/habit_categories_bloc/habit_categories_bloc.dart';
 import 'package:habitatu/habits/data/models/habit_category.dart';
 
+import '../add_habit_page.dart';
 import 'categories_managment_field.dart';
 
 Widget _loadingWidget() => const CircularProgressIndicator();
@@ -44,7 +45,7 @@ class CategoriesAddingField extends StatelessWidget {
                                 categoriesIds: listWithoutNulls));
                       }
                     },
-                    decoration: const InputDecoration(
+                    decoration: AddHabitPage.inputDecoration.copyWith(
                       labelText: 'Categories',
                     ),
                     options: state.habitCategories
@@ -72,10 +73,7 @@ class CategoriesAddingField extends StatelessWidget {
                         .toList(),
                   ),
                 ),
-                TextButton(
-                  style: TextButton.styleFrom(
-                    backgroundColor: AppColors.accentGold,
-                  ),
+                AddHabitPage.styledTextButton(
                   onPressed: () {
                     showDialog(
                         context: context,
@@ -87,11 +85,7 @@ class CategoriesAddingField extends StatelessWidget {
                           );
                         });
                   },
-                  child: Text(
-                    'Manage categories',
-                    style: AppTextStyle.robotoMedium(
-                        color: Colors.white, size: 14),
-                  ),
+                  text: 'Manage categories',
                 ),
               ],
             );

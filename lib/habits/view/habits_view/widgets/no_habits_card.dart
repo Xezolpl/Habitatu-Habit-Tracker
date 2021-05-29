@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:habitatu/core/presentation/constants.dart';
 import 'package:habitatu/core/presentation/widgets/styled_card.dart';
+import 'package:habitatu/habits/bloc/add_habit_bloc/add_habit_bloc.dart';
 import 'package:habitatu/navigation/router.dart';
 
 class NoHabitsCard extends StatelessWidget {
@@ -11,8 +12,6 @@ class NoHabitsCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return StyledCard(
-      margin: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 12.0),
-      padding: EdgeInsets.zero,
       borderRadius: BorderRadius.circular(20),
       child: Container(
         decoration: BoxDecoration(
@@ -57,6 +56,9 @@ class NoHabitsCard extends StatelessWidget {
                               EdgeInsets.symmetric(vertical: 6, horizontal: 20),
                           backgroundColor: Color.fromRGBO(2, 27, 121, 0.45)),
                       onPressed: () {
+                        context
+                            .read<AddHabitBloc>()
+                            .add(const AddHabitEvent.clearHabitClicked());
                         AppRouter.pushNamed(
                             context: context, route: AppRoute.addHabit);
                       },

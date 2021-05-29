@@ -3,6 +3,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:habitatu/core/presentation/constants.dart';
 import 'package:habitatu/habits/bloc/add_habit_bloc/add_habit_bloc.dart';
 
+import '../add_habit_page.dart';
 import 'select_habit_icon_dialog_body.dart';
 
 class HabitIconDisplay extends StatefulWidget {
@@ -43,8 +44,8 @@ class _HabitIconDisplayState extends State<HabitIconDisplay> {
             ),
           ),
           const Spacer(flex: 3),
-          MaterialButton(
-            color: Theme.of(context).accentColor,
+          AddHabitPage.styledTextButton(
+            text: 'Select Image',
             onPressed: () {
               showDialog(
                 context: context,
@@ -82,10 +83,6 @@ class _HabitIconDisplayState extends State<HabitIconDisplay> {
                 },
               );
             },
-            child: Text(
-              'Select Image',
-              style: AppTextStyle.robotoMedium(size: 14, color: Colors.white),
-            ),
           ),
           const Spacer(),
         ],

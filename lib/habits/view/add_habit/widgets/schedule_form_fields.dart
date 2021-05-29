@@ -8,6 +8,9 @@ import 'package:habitatu/core/presentation/constants.dart';
 import 'package:habitatu/core/tools/date_formater.dart';
 import 'package:habitatu/habits/bloc/add_habit_bloc/add_habit_bloc.dart';
 import 'package:habitatu/habits/data/models/habit.dart';
+import 'package:sizer/sizer.dart';
+
+import '../add_habit_page.dart';
 
 class ScheduleFormFields extends StatefulWidget {
   const ScheduleFormFields({Key? key}) : super(key: key);
@@ -46,10 +49,10 @@ class _ScheduleFormFieldsState extends State<ScheduleFormFields> {
           key: formKey,
           child: Column(
             children: [
-              _selectScheduleLabel(),
               _scheduleTypeDropdownField(),
               if (isScheduleFixed) ...[
                 _fixedScheduleDays(),
+                const SizedBox(height: 16.0),
                 _fixedScheduleTimesPerDay(),
               ] else
                 _flexibleScheduleTimesPerWeek(),
@@ -60,18 +63,13 @@ class _ScheduleFormFieldsState extends State<ScheduleFormFields> {
     );
   }
 
-  Widget _selectScheduleLabel() {
-    return Container(
-      alignment: Alignment.centerLeft,
-      padding: const EdgeInsets.only(top: 8),
-      child: const Text('Select schedule'),
-    );
-  }
-
   Widget _scheduleTypeDropdownField() {
     return FormBuilderDropdown(
       name: 'schedule_type',
+      decoration:
+          AddHabitPage.inputDecoration.copyWith(labelText: 'Select schedule'),
       allowClear: true,
+      clearIcon: Container(),
       onChanged: (String? v) {
         setState(() {
           isScheduleFixed = v == 'Fixed';
@@ -144,37 +142,41 @@ class _ScheduleFormFieldsState extends State<ScheduleFormFields> {
   }
 
   Widget _fixedScheduleTimesPerDay() {
-    return FormBuilderTextField(
-      autovalidateMode: AutovalidateMode.onUserInteraction,
-      key: UniqueKey(),
-      name: 'fixedScheduleDayInput',
-      initialValue: selectedDay.value.toString(),
-      keyboardType: TextInputType.number,
-      onEditingComplete: () {
-        setState(() {});
-      },
-      decoration: InputDecoration(
-          labelText:
-              'Times at ${DateFormater.dayName(selectedDay.key).toLowerCase()}'),
-      onChanged: (String? val) {
-        if (val == null || val.isEmpty || double.tryParse(val) == null) {
-          log('Wrong value of times');
-        } else {
-          scheduleDays[selectedDay.key] = double.parse(val);
-          context.read<AddHabitBloc>().add(
-                AddHabitEvent.habitChanged(
-                  schedule: HabitSchedule(
-                    daysToTimes: scheduleDays,
-                    isFlexible: !isScheduleFixed,
+    return SizedBox(
+      width: 50.w,
+      child: FormBuilderTextField(
+        textAlign: TextAlign.center,
+        autovalidateMode: AutovalidateMode.onUserInteraction,
+        key: UniqueKey(),
+        name: 'fixedScheduleDayInput',
+        initialValue: selectedDay.value.toString(),
+        keyboardType: TextInputType.number,
+        onEditingComplete: () {
+          setState(() {});
+        },
+        decoration: AddHabitPage.inputDecoration.copyWith(
+            labelText:
+                'Times at ${DateFormater.dayName(selectedDay.key).toLowerCase()}'),
+        onChanged: (String? val) {
+          if (val == null || val.isEmpty || double.tryParse(val) == null) {
+            log('Wrong value of times');
+          } else {
+            scheduleDays[selectedDay.key] = double.parse(val);
+            context.read<AddHabitBloc>().add(
+                  AddHabitEvent.habitChanged(
+                    schedule: HabitSchedule(
+                      daysToTimes: scheduleDays,
+                      isFlexible: !isScheduleFixed,
+                    ),
                   ),
-                ),
-              );
-        }
-      },
-      validator: FormBuilderValidators.compose([
-        FormBuilderValidators.min(context, 0),
-        FormBuilderValidators.numeric(context),
-      ]),
+                );
+          }
+        },
+        validator: FormBuilderValidators.compose([
+          FormBuilderValidators.min(context, 0),
+          FormBuilderValidators.numeric(context),
+        ]),
+      ),
     );
   }
 
@@ -183,11 +185,11 @@ class _ScheduleFormFieldsState extends State<ScheduleFormFields> {
       name: 'flexible_times_per_week',
       maxLength: 5,
       maxLengthEnforcement: MaxLengthEnforcement.enforced,
-      decoration: const InputDecoration(labelText: 'Times per week'),
+      decoration:
+          AddHabitPage.inputDecoration.copyWith(labelText: 'Times per week'),
+      keyboardType: TextInputType.number,
       onChanged: (String? val) {
-        if (val == null || val.isEmpty || double.tryParse(val) == null) {
-          log('Wrong value of times (flexible)');
-        } else {
+        if (val != null && val.isNotEmpty && double.tryParse(val) != null) {
           context.read<AddHabitBloc>().add(
                 AddHabitEvent.habitChanged(
                   schedule: HabitSchedule(
@@ -196,6 +198,8 @@ class _ScheduleFormFieldsState extends State<ScheduleFormFields> {
                   ),
                 ),
               );
+        } else {
+          log('Wrong value of times (flexible)');
         }
       },
       validator: FormBuilderValidators.compose(

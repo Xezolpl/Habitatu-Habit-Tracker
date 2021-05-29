@@ -8,8 +8,6 @@ class WelcomeCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return StyledCard(
-      padding: EdgeInsets.zero,
-      margin: const EdgeInsets.all(12.0),
       borderRadius: BorderRadius.circular(20),
       child: Container(
         width: MediaQuery.of(context).size.width,

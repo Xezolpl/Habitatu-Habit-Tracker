@@ -5,6 +5,8 @@ import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:habitatu/core/presentation/constants.dart';
 import 'package:habitatu/habits/bloc/add_habit_bloc/add_habit_bloc.dart';
 
+import '../add_habit_page.dart';
+
 class ReasonsFormBuilderField extends StatefulWidget {
   const ReasonsFormBuilderField({Key? key}) : super(key: key);
 
@@ -62,7 +64,8 @@ class _ReasonsFormBuilderFieldState extends State<ReasonsFormBuilderField> {
           for (int i = 0; i < reasonsFields.length; i++)
             FormBuilderTextField(
               name: 'reasonsField$i',
-              decoration: InputDecoration(labelText: 'Reason ${i + 1}'),
+              decoration: AddHabitPage.inputDecoration
+                  .copyWith(labelText: 'Reason ${i + 1}'),
               validator: FormBuilderValidators.compose(
                 [
                   FormBuilderValidators.maxLength(context, 150),

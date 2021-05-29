@@ -4,14 +4,16 @@ import 'package:habitatu/habits/bloc/add_habit_bloc/add_habit_bloc.dart';
 import 'package:habitatu/habits/bloc/habits_bloc/habits_bloc.dart';
 import 'package:habitatu/habits/data/models/habit.dart';
 
+import '../add_habit_page.dart';
+
 class SubmitFormButton extends StatelessWidget {
   final GlobalKey<FormBuilderState> formKey;
   const SubmitFormButton(this.formKey, {Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return MaterialButton(
-      color: Theme.of(context).accentColor,
+    return AddHabitPage.styledTextButton(
+      text: 'Submit',
       onPressed: () {
         formKey.currentState?.save();
         if (formKey.currentState?.validate() ?? false) {
@@ -41,10 +43,6 @@ class SubmitFormButton extends StatelessWidget {
           }
         }
       },
-      child: const Text(
-        'Submit',
-        style: TextStyle(color: Colors.white),
-      ),
     );
   }
 }
