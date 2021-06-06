@@ -20,6 +20,13 @@ class _$HabitCategoriesEventTearOff {
     return const _LoadHabitCategoriesCalled();
   }
 
+  _HabitCategoriesReceived habitCategoriesReceived(
+      Either<Failure, List<HabitCategory>> result) {
+    return _HabitCategoriesReceived(
+      result,
+    );
+  }
+
   _AddHabitCategoryClicked addHabitCategoryClicked(
       HabitCategory habitCategory) {
     return _AddHabitCategoryClicked(
@@ -48,6 +55,8 @@ mixin _$HabitCategoriesEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() loadHabitCategoriesCalled,
+    required TResult Function(Either<Failure, List<HabitCategory>> result)
+        habitCategoriesReceived,
     required TResult Function(HabitCategory habitCategory)
         addHabitCategoryClicked,
     required TResult Function(HabitCategory habitCategory) habitCategoryChanged,
@@ -57,6 +66,8 @@ mixin _$HabitCategoriesEvent {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? loadHabitCategoriesCalled,
+    TResult Function(Either<Failure, List<HabitCategory>> result)?
+        habitCategoriesReceived,
     TResult Function(HabitCategory habitCategory)? addHabitCategoryClicked,
     TResult Function(HabitCategory habitCategory)? habitCategoryChanged,
     TResult Function(String id)? removeHabitCategoryClicked,
@@ -67,6 +78,8 @@ mixin _$HabitCategoriesEvent {
   TResult map<TResult extends Object?>({
     required TResult Function(_LoadHabitCategoriesCalled value)
         loadHabitCategoriesCalled,
+    required TResult Function(_HabitCategoriesReceived value)
+        habitCategoriesReceived,
     required TResult Function(_AddHabitCategoryClicked value)
         addHabitCategoryClicked,
     required TResult Function(_HabitCategoryChanged value) habitCategoryChanged,
@@ -78,6 +91,7 @@ mixin _$HabitCategoriesEvent {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_LoadHabitCategoriesCalled value)?
         loadHabitCategoriesCalled,
+    TResult Function(_HabitCategoriesReceived value)? habitCategoriesReceived,
     TResult Function(_AddHabitCategoryClicked value)? addHabitCategoryClicked,
     TResult Function(_HabitCategoryChanged value)? habitCategoryChanged,
     TResult Function(_RemoveHabitCategoryClicked value)?
@@ -146,6 +160,8 @@ class _$_LoadHabitCategoriesCalled implements _LoadHabitCategoriesCalled {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() loadHabitCategoriesCalled,
+    required TResult Function(Either<Failure, List<HabitCategory>> result)
+        habitCategoriesReceived,
     required TResult Function(HabitCategory habitCategory)
         addHabitCategoryClicked,
     required TResult Function(HabitCategory habitCategory) habitCategoryChanged,
@@ -158,6 +174,8 @@ class _$_LoadHabitCategoriesCalled implements _LoadHabitCategoriesCalled {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? loadHabitCategoriesCalled,
+    TResult Function(Either<Failure, List<HabitCategory>> result)?
+        habitCategoriesReceived,
     TResult Function(HabitCategory habitCategory)? addHabitCategoryClicked,
     TResult Function(HabitCategory habitCategory)? habitCategoryChanged,
     TResult Function(String id)? removeHabitCategoryClicked,
@@ -174,6 +192,8 @@ class _$_LoadHabitCategoriesCalled implements _LoadHabitCategoriesCalled {
   TResult map<TResult extends Object?>({
     required TResult Function(_LoadHabitCategoriesCalled value)
         loadHabitCategoriesCalled,
+    required TResult Function(_HabitCategoriesReceived value)
+        habitCategoriesReceived,
     required TResult Function(_AddHabitCategoryClicked value)
         addHabitCategoryClicked,
     required TResult Function(_HabitCategoryChanged value) habitCategoryChanged,
@@ -188,6 +208,7 @@ class _$_LoadHabitCategoriesCalled implements _LoadHabitCategoriesCalled {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_LoadHabitCategoriesCalled value)?
         loadHabitCategoriesCalled,
+    TResult Function(_HabitCategoriesReceived value)? habitCategoriesReceived,
     TResult Function(_AddHabitCategoryClicked value)? addHabitCategoryClicked,
     TResult Function(_HabitCategoryChanged value)? habitCategoryChanged,
     TResult Function(_RemoveHabitCategoryClicked value)?
@@ -203,6 +224,147 @@ class _$_LoadHabitCategoriesCalled implements _LoadHabitCategoriesCalled {
 
 abstract class _LoadHabitCategoriesCalled implements HabitCategoriesEvent {
   const factory _LoadHabitCategoriesCalled() = _$_LoadHabitCategoriesCalled;
+}
+
+/// @nodoc
+abstract class _$HabitCategoriesReceivedCopyWith<$Res> {
+  factory _$HabitCategoriesReceivedCopyWith(_HabitCategoriesReceived value,
+          $Res Function(_HabitCategoriesReceived) then) =
+      __$HabitCategoriesReceivedCopyWithImpl<$Res>;
+  $Res call({Either<Failure, List<HabitCategory>> result});
+}
+
+/// @nodoc
+class __$HabitCategoriesReceivedCopyWithImpl<$Res>
+    extends _$HabitCategoriesEventCopyWithImpl<$Res>
+    implements _$HabitCategoriesReceivedCopyWith<$Res> {
+  __$HabitCategoriesReceivedCopyWithImpl(_HabitCategoriesReceived _value,
+      $Res Function(_HabitCategoriesReceived) _then)
+      : super(_value, (v) => _then(v as _HabitCategoriesReceived));
+
+  @override
+  _HabitCategoriesReceived get _value =>
+      super._value as _HabitCategoriesReceived;
+
+  @override
+  $Res call({
+    Object? result = freezed,
+  }) {
+    return _then(_HabitCategoriesReceived(
+      result == freezed
+          ? _value.result
+          : result // ignore: cast_nullable_to_non_nullable
+              as Either<Failure, List<HabitCategory>>,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$_HabitCategoriesReceived implements _HabitCategoriesReceived {
+  const _$_HabitCategoriesReceived(this.result);
+
+  @override
+  final Either<Failure, List<HabitCategory>> result;
+
+  @override
+  String toString() {
+    return 'HabitCategoriesEvent.habitCategoriesReceived(result: $result)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other is _HabitCategoriesReceived &&
+            (identical(other.result, result) ||
+                const DeepCollectionEquality().equals(other.result, result)));
+  }
+
+  @override
+  int get hashCode =>
+      runtimeType.hashCode ^ const DeepCollectionEquality().hash(result);
+
+  @JsonKey(ignore: true)
+  @override
+  _$HabitCategoriesReceivedCopyWith<_HabitCategoriesReceived> get copyWith =>
+      __$HabitCategoriesReceivedCopyWithImpl<_HabitCategoriesReceived>(
+          this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() loadHabitCategoriesCalled,
+    required TResult Function(Either<Failure, List<HabitCategory>> result)
+        habitCategoriesReceived,
+    required TResult Function(HabitCategory habitCategory)
+        addHabitCategoryClicked,
+    required TResult Function(HabitCategory habitCategory) habitCategoryChanged,
+    required TResult Function(String id) removeHabitCategoryClicked,
+  }) {
+    return habitCategoriesReceived(result);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? loadHabitCategoriesCalled,
+    TResult Function(Either<Failure, List<HabitCategory>> result)?
+        habitCategoriesReceived,
+    TResult Function(HabitCategory habitCategory)? addHabitCategoryClicked,
+    TResult Function(HabitCategory habitCategory)? habitCategoryChanged,
+    TResult Function(String id)? removeHabitCategoryClicked,
+    required TResult orElse(),
+  }) {
+    if (habitCategoriesReceived != null) {
+      return habitCategoriesReceived(result);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_LoadHabitCategoriesCalled value)
+        loadHabitCategoriesCalled,
+    required TResult Function(_HabitCategoriesReceived value)
+        habitCategoriesReceived,
+    required TResult Function(_AddHabitCategoryClicked value)
+        addHabitCategoryClicked,
+    required TResult Function(_HabitCategoryChanged value) habitCategoryChanged,
+    required TResult Function(_RemoveHabitCategoryClicked value)
+        removeHabitCategoryClicked,
+  }) {
+    return habitCategoriesReceived(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_LoadHabitCategoriesCalled value)?
+        loadHabitCategoriesCalled,
+    TResult Function(_HabitCategoriesReceived value)? habitCategoriesReceived,
+    TResult Function(_AddHabitCategoryClicked value)? addHabitCategoryClicked,
+    TResult Function(_HabitCategoryChanged value)? habitCategoryChanged,
+    TResult Function(_RemoveHabitCategoryClicked value)?
+        removeHabitCategoryClicked,
+    required TResult orElse(),
+  }) {
+    if (habitCategoriesReceived != null) {
+      return habitCategoriesReceived(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _HabitCategoriesReceived implements HabitCategoriesEvent {
+  const factory _HabitCategoriesReceived(
+      Either<Failure, List<HabitCategory>> result) = _$_HabitCategoriesReceived;
+
+  Either<Failure, List<HabitCategory>> get result =>
+      throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  _$HabitCategoriesReceivedCopyWith<_HabitCategoriesReceived> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -274,6 +436,8 @@ class _$_AddHabitCategoryClicked implements _AddHabitCategoryClicked {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() loadHabitCategoriesCalled,
+    required TResult Function(Either<Failure, List<HabitCategory>> result)
+        habitCategoriesReceived,
     required TResult Function(HabitCategory habitCategory)
         addHabitCategoryClicked,
     required TResult Function(HabitCategory habitCategory) habitCategoryChanged,
@@ -286,6 +450,8 @@ class _$_AddHabitCategoryClicked implements _AddHabitCategoryClicked {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? loadHabitCategoriesCalled,
+    TResult Function(Either<Failure, List<HabitCategory>> result)?
+        habitCategoriesReceived,
     TResult Function(HabitCategory habitCategory)? addHabitCategoryClicked,
     TResult Function(HabitCategory habitCategory)? habitCategoryChanged,
     TResult Function(String id)? removeHabitCategoryClicked,
@@ -302,6 +468,8 @@ class _$_AddHabitCategoryClicked implements _AddHabitCategoryClicked {
   TResult map<TResult extends Object?>({
     required TResult Function(_LoadHabitCategoriesCalled value)
         loadHabitCategoriesCalled,
+    required TResult Function(_HabitCategoriesReceived value)
+        habitCategoriesReceived,
     required TResult Function(_AddHabitCategoryClicked value)
         addHabitCategoryClicked,
     required TResult Function(_HabitCategoryChanged value) habitCategoryChanged,
@@ -316,6 +484,7 @@ class _$_AddHabitCategoryClicked implements _AddHabitCategoryClicked {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_LoadHabitCategoriesCalled value)?
         loadHabitCategoriesCalled,
+    TResult Function(_HabitCategoriesReceived value)? habitCategoriesReceived,
     TResult Function(_AddHabitCategoryClicked value)? addHabitCategoryClicked,
     TResult Function(_HabitCategoryChanged value)? habitCategoryChanged,
     TResult Function(_RemoveHabitCategoryClicked value)?
@@ -407,6 +576,8 @@ class _$_HabitCategoryChanged implements _HabitCategoryChanged {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() loadHabitCategoriesCalled,
+    required TResult Function(Either<Failure, List<HabitCategory>> result)
+        habitCategoriesReceived,
     required TResult Function(HabitCategory habitCategory)
         addHabitCategoryClicked,
     required TResult Function(HabitCategory habitCategory) habitCategoryChanged,
@@ -419,6 +590,8 @@ class _$_HabitCategoryChanged implements _HabitCategoryChanged {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? loadHabitCategoriesCalled,
+    TResult Function(Either<Failure, List<HabitCategory>> result)?
+        habitCategoriesReceived,
     TResult Function(HabitCategory habitCategory)? addHabitCategoryClicked,
     TResult Function(HabitCategory habitCategory)? habitCategoryChanged,
     TResult Function(String id)? removeHabitCategoryClicked,
@@ -435,6 +608,8 @@ class _$_HabitCategoryChanged implements _HabitCategoryChanged {
   TResult map<TResult extends Object?>({
     required TResult Function(_LoadHabitCategoriesCalled value)
         loadHabitCategoriesCalled,
+    required TResult Function(_HabitCategoriesReceived value)
+        habitCategoriesReceived,
     required TResult Function(_AddHabitCategoryClicked value)
         addHabitCategoryClicked,
     required TResult Function(_HabitCategoryChanged value) habitCategoryChanged,
@@ -449,6 +624,7 @@ class _$_HabitCategoryChanged implements _HabitCategoryChanged {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_LoadHabitCategoriesCalled value)?
         loadHabitCategoriesCalled,
+    TResult Function(_HabitCategoriesReceived value)? habitCategoriesReceived,
     TResult Function(_AddHabitCategoryClicked value)? addHabitCategoryClicked,
     TResult Function(_HabitCategoryChanged value)? habitCategoryChanged,
     TResult Function(_RemoveHabitCategoryClicked value)?
@@ -541,6 +717,8 @@ class _$_RemoveHabitCategoryClicked implements _RemoveHabitCategoryClicked {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() loadHabitCategoriesCalled,
+    required TResult Function(Either<Failure, List<HabitCategory>> result)
+        habitCategoriesReceived,
     required TResult Function(HabitCategory habitCategory)
         addHabitCategoryClicked,
     required TResult Function(HabitCategory habitCategory) habitCategoryChanged,
@@ -553,6 +731,8 @@ class _$_RemoveHabitCategoryClicked implements _RemoveHabitCategoryClicked {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? loadHabitCategoriesCalled,
+    TResult Function(Either<Failure, List<HabitCategory>> result)?
+        habitCategoriesReceived,
     TResult Function(HabitCategory habitCategory)? addHabitCategoryClicked,
     TResult Function(HabitCategory habitCategory)? habitCategoryChanged,
     TResult Function(String id)? removeHabitCategoryClicked,
@@ -569,6 +749,8 @@ class _$_RemoveHabitCategoryClicked implements _RemoveHabitCategoryClicked {
   TResult map<TResult extends Object?>({
     required TResult Function(_LoadHabitCategoriesCalled value)
         loadHabitCategoriesCalled,
+    required TResult Function(_HabitCategoriesReceived value)
+        habitCategoriesReceived,
     required TResult Function(_AddHabitCategoryClicked value)
         addHabitCategoryClicked,
     required TResult Function(_HabitCategoryChanged value) habitCategoryChanged,
@@ -583,6 +765,7 @@ class _$_RemoveHabitCategoryClicked implements _RemoveHabitCategoryClicked {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_LoadHabitCategoriesCalled value)?
         loadHabitCategoriesCalled,
+    TResult Function(_HabitCategoriesReceived value)? habitCategoriesReceived,
     TResult Function(_AddHabitCategoryClicked value)? addHabitCategoryClicked,
     TResult Function(_HabitCategoryChanged value)? habitCategoryChanged,
     TResult Function(_RemoveHabitCategoryClicked value)?

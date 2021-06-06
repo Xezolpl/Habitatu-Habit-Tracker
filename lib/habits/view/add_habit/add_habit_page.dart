@@ -52,6 +52,18 @@ class AddHabitPage extends StatelessWidget {
       );
 
   final _formKey = GlobalKey<FormBuilderState>();
+  late final List<Widget> children = [
+    const HabitIconDisplay(),
+    const NameFormBuilder(),
+    const DescriptionField(),
+    const ReasonsFormBuilderField(),
+    const ScheduleFormFields(),
+    const StartDateField(),
+    RemindersAddingField(_formKey),
+    // const CategoriesAddingField(),
+    const SizedBox(height: 12),
+    SubmitFormButton(_formKey),
+  ];
   AddHabitPage({Key? key}) : super(key: key);
 
   @override
@@ -81,18 +93,14 @@ class AddHabitPage extends StatelessWidget {
               child: ListView(
                 padding: const EdgeInsets.symmetric(
                     vertical: 16.0, horizontal: 16.0),
-                children: [
-                  const HabitIconDisplay(),
-                  const NameFormBuilder(),
-                  const DescriptionField(),
-                  const ReasonsFormBuilderField(),
-                  const ScheduleFormFields(),
-                  const StartDateField(),
-                  RemindersAddingField(_formKey),
-                  const CategoriesAddingField(),
-                  const SizedBox(height: 16),
-                  SubmitFormButton(_formKey),
-                ],
+                children: children
+                    .map(
+                      (w) => Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 4),
+                        child: w,
+                      ),
+                    )
+                    .toList(),
               ),
             ),
           ),

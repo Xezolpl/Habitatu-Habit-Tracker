@@ -2,6 +2,7 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
+import 'package:flutter_text_styled/flutter_text_styled.dart';
 import 'package:habitatu/core/presentation/constants.dart';
 import 'package:habitatu/habits/bloc/add_habit_bloc/add_habit_bloc.dart';
 
@@ -28,16 +29,22 @@ class _ReasonsFormBuilderFieldState extends State<ReasonsFormBuilderField> {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(12),
+        borderRadius: BorderRadius.circular(20),
         border: Border.all(width: 1, color: AppColors.gray),
       ),
-      margin: const EdgeInsets.symmetric(vertical: 8.0),
       padding: const EdgeInsets.all(16.0),
       child: Column(
         children: [
           Row(
             children: [
-              const Text('Reasons'),
+              TextStyled(
+                textStyle: AppTextStyle.robotoRegular(
+                  size: 16,
+                  color: AppColors.textDarkGray,
+                ),
+              ).getRichText(
+                '[u]Reasons to perform a habit[/u]\n - What motivates you to do the habit\n - What do you want to accomplish by it\n - In which lifefields will it affect you',
+              ),
               const Spacer(),
               IconButton(
                 onPressed: () {
@@ -61,6 +68,7 @@ class _ReasonsFormBuilderFieldState extends State<ReasonsFormBuilderField> {
               ),
             ],
           ),
+          const SizedBox(height: 8),
           for (int i = 0; i < reasonsFields.length; i++)
             FormBuilderTextField(
               name: 'reasonsField$i',

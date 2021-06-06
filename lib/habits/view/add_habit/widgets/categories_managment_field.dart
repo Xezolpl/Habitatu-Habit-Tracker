@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_colorpicker/flutter_colorpicker.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
+import 'package:habitatu/core/models/failures.dart';
 import 'package:habitatu/core/presentation/constants.dart';
 import 'package:habitatu/habits/bloc/add_habit_bloc/add_habit_bloc.dart';
 import 'package:habitatu/habits/bloc/habit_categories_bloc/habit_categories_bloc.dart';
@@ -28,6 +29,21 @@ class _HabitCategoriesManagmentWidgetState
 
   @override
   Widget build(BuildContext context) {
+    return BlocBuilder<HabitCategoriesBloc, HabitCategoriesState>(
+        builder: (context, state) {
+      return state.map(
+        initial: (_) => _loadingWidget(),
+        loading: (_) => _loadingWidget(),
+        success: (s) => _buildLoaded(context, s.habitCategories),
+        failure: (s) => _errorWidget(s.failure),
+      );
+    });
+  }
+
+  Widget _loadingWidget() => const Center(child: CircularProgressIndicator());
+  Widget _errorWidget(Failure failure) => Text('ERROR $failure');
+
+  Widget _buildLoaded(BuildContext context, List<HabitCategory> categories) {
     return FormBuilder(
       key: _formKey,
       autovalidateMode: AutovalidateMode.always,

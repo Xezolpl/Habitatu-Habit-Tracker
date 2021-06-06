@@ -4,6 +4,8 @@ part of 'habit_categories_bloc.dart';
 class HabitCategoriesEvent with _$HabitCategoriesEvent {
   const factory HabitCategoriesEvent.loadHabitCategoriesCalled() =
       _LoadHabitCategoriesCalled;
+  const factory HabitCategoriesEvent.habitCategoriesReceived(
+      Either<Failure, List<HabitCategory>> result) = _HabitCategoriesReceived;
   const factory HabitCategoriesEvent.addHabitCategoryClicked(
       HabitCategory habitCategory) = _AddHabitCategoryClicked;
   //If using this please be sure you pass habit with the same id as the previous version

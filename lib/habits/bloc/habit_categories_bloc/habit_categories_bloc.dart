@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:bloc/bloc.dart';
+import 'package:dartz/dartz.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:habitatu/core/models/failures.dart';
 import 'package:habitatu/habits/data/models/habit_category.dart';
@@ -25,16 +26,20 @@ class HabitCategoriesBloc
   ) async* {
     yield* event.map(
       loadHabitCategoriesCalled: (e) async* {
-        yield* _repository.watchAll().map(
+        yield const HabitCategoriesState.loading();
+        _repository.watchAll().listen(
           (r) {
-            return r.fold((f) {
-              return HabitCategoriesState.failure(f);
-            }, (newHabitsCategories) {
-              _habitCategories = List.from(newHabitsCategories);
-              return HabitCategoriesState.success(newHabitsCategories);
-            });
+            add(HabitCategoriesEvent.habitCategoriesReceived(r));
           },
         );
+      },
+      habitCategoriesReceived: (e) async* {
+        yield* e.result.fold((f) async* {
+          yield* _onFailure(f);
+        }, (newCategories) async* {
+          _habitCategories = List.from(newCategories);
+          yield* _onSuccess(_habitCategories);
+        });
       },
       addHabitCategoryClicked: (e) async* {
         final r = await _repository.create(e.habitCategory);
